@@ -21,7 +21,7 @@ public class Homework {
 
         System.out.println(checkSum(a, b));
 
-        checkPosOrNeg(a);
+        isPositive(a);
 
         greet(name);
 
@@ -48,35 +48,40 @@ public class Homework {
         }
     }
 
+    private static boolean isLeapYear(int year){
+        return (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+    }
+
     // task 4
 
-    private static void greet(String name) {
-        System.out.println("Hello, " + name);
+    private static String greet(String name) {
+        //System.out.println("Hello, " + name);
+        return "Hello, " + name + "!";
     }
 
     // task 3
-    private static void checkPosOrNeg(int a) {
-        if(a >= 0){
-            System.out.println("Number you have entered is 0 or larger that 0");
-        } else {
-            System.out.println("Number you have entered is less than 0");
-        }
+    private static boolean isPositive(int a) {
+
+        return a >= 0;
+
+//        if(a >= 0){
+//            System.out.println("Number you have entered is 0 or larger that 0");
+//        } else {
+//            System.out.println("Number you have entered is less than 0");
+//        }
     }
 
     // task 2
     private static boolean checkSum(int a, int b) {
-        int checksum = a + b;
-        if (checksum > 10 && checksum <= 20){
-            return true;
-        } else {
-            return false;
-        }
+        int sum = a + b;
+        return sum >= 10 && sum <= 20;
     }
 
     // task 1
     private static float calculateGetFloat(int a, int b, int c, int d) {
-        float result;
-        result = a * (b + (c / d));
-        return result;
+        // float dd = d;
+        // return a * (b + (c / dd));
+        return a * (b + (c * 1.0f / d));
+
     }
 }
