@@ -11,14 +11,21 @@ public class Main {
 
         //task 2:
         int[] arr1 = new int[8];
+        System.out.println(Arrays.toString(fillArray(arr1)));
 
-        int[] arrAvail = {1, 4, 7, 10, 13, 16, 19, 22};
+
+    }
+
+    /**
+     * 2 Задать пустой целочисленный массив размером 8. Написать метод, который помощью цикла заполнит его значениями 1 4 7 10 13 16 19 22;
+     * @param arr1
+     * @return
+     */
+    private static int[] fillArray(int[] arr1) {
         for (int i = 0; i < arr1.length; i++){
-            arr1[i] = (i == 0) ? 1 : arr1[i] + 3;
+            arr1[i] = (i == 0) ? 1 : arr1[i-1] + 3;
         }
-        System.out.println(Arrays.toString(arr1));
-
-
+        return arr1;
     }
 
     /**
