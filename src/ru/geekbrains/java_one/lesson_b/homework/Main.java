@@ -13,7 +13,61 @@ public class Main {
         int[] arr1 = new int[8];
         System.out.println(Arrays.toString(fillArray(arr1)));
 
+        //task 3:
+        int[] arr2 = { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 };
+        System.out.println(Arrays.toString(multiplyArray(arr2)));
 
+        //task 4:
+        int[] arr3 = { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9 };
+        System.out.println(findMax(arr3));
+        System.out.println(findMin(arr3));
+
+
+
+
+    }
+
+    /**
+     * 4 Задать одномерный массив. Написать методы поиска в нём минимального и максимального элемента;
+     * @param arr
+     * @return
+     */
+
+    private static int findMin(int[] arr) {
+        int min = arr[0];
+
+
+        for (int i = 0; i < arr.length; i++) {
+            if( arr[i] < min){
+                min = arr[i];
+            }
+        }
+        return min;
+    }
+
+    private static int findMax(int[] arr) {
+        int max = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            if( arr[i] > max){
+                max = arr[i];
+            }
+        }
+        return max;
+    }
+
+    /**
+     * 3 Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ], написать метод, принимающий на вход массив и умножающий числа меньше 6 на 2;
+     * @param arr
+     * @return
+     */
+    private static int[] multiplyArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] > 6){
+                arr[i] = arr[i] * 2;
+            }
+        }
+        return arr;
     }
 
     /**
