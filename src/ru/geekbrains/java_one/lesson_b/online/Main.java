@@ -30,7 +30,7 @@ public class Main {
         ar0[1][2] = 5;
 //...
         int[][][] ar3 = new int[3][3][3];
-        System.out.println(Arrays.deepToString(ar0));
+        System.out.println(Arrays.deepToString(ar3));
     }
 
     private static void arraysExample() {

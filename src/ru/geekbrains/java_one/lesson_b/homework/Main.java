@@ -22,10 +22,24 @@ public class Main {
         System.out.println(findMax(arr3));
         System.out.println(findMin(arr3));
 
+        //task 5:
+        //draw table
+        //fillDiagonal
 
+        int[][] table = new int[3][3];
 
-
-    }
+        for (int i = 0; i < table.length; i++) {
+                for (int j = 0; j < table.length; j++) {
+                    if (i == j) {
+                        table[i][j] = 1;
+                    } else {
+                        table[i][j] = 0;
+                    }
+                    System.out.print(table[i][j] + "\t");
+                }
+                System.out.println();
+            }
+        }
 
     /**
      * 4 Задать одномерный массив. Написать методы поиска в нём минимального и максимального элемента;
