@@ -23,49 +23,54 @@ public class Main {
         System.out.println(findMin(arr3));
 
         //task 5:
-        //draw table
-        //fillDiagonal
 
-        int[][] table = new int[3][3];
+        int tableSize = 3;
+        int[][] table = new int[tableSize][tableSize];
 
+        fillDiagonal(tableSize, table);
+
+    }
+
+
+    /**
+     * 5 * Создать квадратный целочисленный массив (количество строк и столбцов одинаковое), заполнить его диагональные элементы единицами, используя цикл(ы);
+     * 
+     * @param tableSize
+     * @param table
+     */
+    private static void fillDiagonal(int tableSize, int[][] table) {
         for (int i = 0; i < table.length; i++) {
                 for (int j = 0; j < table.length; j++) {
 
-                    fillDiagonal(table, i, j);
-//                    if (i == j) {
-//                        table[i][j] = 1;
-//                    } else {
-//                        table[i][j] = 0;
-//                    }
+                    if((i + 1) != tableSize && (j + 1) != tableSize){
+                        table[i][j] = 1;
+                        table[i+1][j+1] = 1;
+                    }
                     System.out.print(table[i][j] + "\t");
                 }
                 System.out.println();
             }
+    }
 
-//        int X = 0;
-//        int Y = 0;
+    /**
+     * A try to solve task 5 with recursion
+     */
+//    private static void fillDiagonal(int[][] table, int x, int y) {
+//        while (!isOutOfTable(table, x, y)){
+//            table[x + 1][y + 1] = 1;
+//        }
+//    }
 //
-//
-//        fillDiagonal(table, X, Y);
-
-    }
-
-    private static void fillDiagonal(int[][] table, int x, int y) {
-        while (!isOutOfTable(table, x, y)){
-            table[x + 1][y + 1] = 1;
-        }
-    }
-
-    public static boolean isOutOfTable(int[][] table, int x, int y){
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table.length; j++) {
-                if(x > j || y > i){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public static boolean isOutOfTable(int[][] table, int x, int y){
+//        for (int i = 0; i < table.length; i++) {
+//            for (int j = 0; j < table.length; j++) {
+//                if(x > j || y > i){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * 4 Задать одномерный массив. Написать методы поиска в нём минимального и максимального элемента;
