@@ -23,11 +23,39 @@ public class Main {
         System.out.println(findMin(arr3));
 
         //task 5:
-
         int tableSize = 3;
         int[][] table = new int[tableSize][tableSize];
 
         fillDiagonal(tableSize, table);
+
+        // task 6:
+        int[] arr4 = { 1, 1, 1, 2, 1 };
+
+        int sumLeft = 0;
+        int sumRight = 0;
+
+        for (int i = 0; i < arr4.length; i++) {
+            if (i == 0) {
+                sumLeft += arr4[i];
+                for (int j = i+1; j < arr4.length; j++) {
+                    sumRight += arr4[j];
+                }
+            } else {
+                for (int k = arr4[i]; k >= 0; k--) {
+                    sumLeft += arr4[k];
+                }
+
+                for (int j = i+1; j < arr4.length; j++) {
+                    sumRight += arr4[j];
+                }
+            }
+
+            if (sumLeft == sumRight){
+                System.out.println("true");
+                break;
+            }
+        }
+        System.out.println("false");
 
     }
 
