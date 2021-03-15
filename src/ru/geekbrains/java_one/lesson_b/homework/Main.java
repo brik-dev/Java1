@@ -30,33 +30,40 @@ public class Main {
 
         // task 6:
         int[] arr4 = { 1, 1, 1, 2, 1 };
+        System.out.println(isLeftAndRightSumEqual(arr4, 2));
 
+    }
+
+    /**
+     * 6 ** Написать метод, в который передается не пустой одномерный целочисленный массив,
+     * метод должен вернуть true если в массиве есть место, в котором сумма левой и правой части массива равны.
+     * Примеры: checkBalance([1, 1, 1, 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, 1, 2, 3, 4]) → true.
+     * @param arr4
+     */
+
+    private static boolean isLeftAndRightSumEqual(int[] arr4, int startPoint) {
         int sumLeft = 0;
         int sumRight = 0;
 
-        for (int i = 0; i < arr4.length; i++) {
-            if (i == 0) {
-                sumLeft += arr4[i];
-                for (int j = i+1; j < arr4.length; j++) {
-                    sumRight += arr4[j];
-                }
-            } else {
-                for (int k = arr4[i]; k >= 0; k--) {
-                    sumLeft += arr4[k];
-                }
-
-                for (int j = i+1; j < arr4.length; j++) {
-                    sumRight += arr4[j];
-                }
+        if (startPoint == 0) {
+            sumLeft += arr4[startPoint];
+            for (int j = startPoint + 1; j < arr4.length; j++) {
+                sumRight += arr4[j];
             }
-
-            if (sumLeft == sumRight){
-                System.out.println("true");
-                break;
+        } else {
+            for (int k = startPoint; k >= 0; k--) {
+                sumLeft += arr4[k];
+            }
+            for (int l = startPoint + 1; l < arr4.length; l++) {
+                sumRight += arr4[l];
             }
         }
-        System.out.println("false");
 
+        if (sumLeft == sumRight){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
