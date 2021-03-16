@@ -32,6 +32,32 @@ public class Main {
         int[] arr4 = { 1, 1, 1, 2, 1 };
         System.out.println(isLeftAndRightSumEqual(arr4, 2));
 
+        //task 7:
+        int[] arr5 = { 1, 2, 3, 4, 5 };
+
+        int moves = 1;
+        int[] bufArr = new int[arr5.length];
+
+        if(moves > 0){
+            for (int i = 0; i < arr5.length; i++) {
+                bufArr[i] = arr5[i];
+            }
+            for (int i = 0; i < arr5.length; i++) {
+                while (i + moves < arr5.length){
+                    arr5[i + moves] = bufArr[i];
+                }
+            }
+            for (int i = 0; i < bufArr.length; i++) {
+                arr5[i] = bufArr[bufArr.length - moves];
+            }
+            System.out.println(Arrays.toString(arr5));
+
+        }else if (moves < 0){
+            System.out.println("Move to the left");
+        }else {
+            System.out.println("Nothing to do");
+        }
+
     }
 
     /**
