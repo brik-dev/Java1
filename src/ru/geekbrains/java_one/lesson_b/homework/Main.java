@@ -35,7 +35,7 @@ public class Main {
         //task 7:
         int[] arr5 = { 1, 2, 3, 4, 5 };
 
-        int moves = 1;
+        int moves = 2;
         int[] bufArr = new int[arr5.length];
 
         if(moves > 0){
@@ -43,11 +43,11 @@ public class Main {
                 bufArr[i] = arr5[i];
             }
             for (int i = 0; i < arr5.length; i++) {
-                while (i + moves < arr5.length){
+                if ((i + moves) < arr5.length){
                     arr5[i + moves] = bufArr[i];
                 }
             }
-            for (int i = 0; i < bufArr.length; i++) {
+            for (int i = 0, int j = arr5.length - moves; i < moves, j < arr5.length; i++, j++) {
                 arr5[i] = bufArr[bufArr.length - moves];
             }
             System.out.println(Arrays.toString(arr5));
