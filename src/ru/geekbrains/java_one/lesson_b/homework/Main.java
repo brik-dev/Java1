@@ -35,28 +35,22 @@ public class Main {
         //task 7:
         int[] arr5 = { 1, 2, 3, 4, 5 };
 
-        int moves = 2;
-        int[] bufArr = new int[arr5.length];
+        // move n positions to the right - done
+        int n = 1;
+        int[] newArray = new int[arr5.length];
 
-        if(moves > 0){
-            for (int i = 0; i < arr5.length; i++) {
-                bufArr[i] = arr5[i];
-            }
-            for (int i = 0; i < arr5.length; i++) {
-                if ((i + moves) < arr5.length){
-                    arr5[i + moves] = bufArr[i];
+        for (int i = 0, j = i + n; i < arr5.length; i++, j++) {
+            if(j < newArray.length){
+                newArray[j] = arr5[i];
+            }else {
+                for (int k = 0, l = arr5.length - n ; k < newArray.length - i; k++, l++) {
+                    newArray[k] = arr5[l];
                 }
             }
-            for (int i = 0, int j = arr5.length - moves; i < moves, j < arr5.length; i++, j++) {
-                arr5[i] = bufArr[bufArr.length - moves];
-            }
-            System.out.println(Arrays.toString(arr5));
-
-        }else if (moves < 0){
-            System.out.println("Move to the left");
-        }else {
-            System.out.println("Nothing to do");
         }
+        System.out.println(Arrays.toString(newArray));
+
+        // move n positions to the left - to be done
 
     }
 
