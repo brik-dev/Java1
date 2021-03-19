@@ -34,24 +34,48 @@ public class Main {
 
         //task 7:
         int[] arr5 = { 1, 2, 3, 4, 5 };
+        int moves = -3;
 
-        // move n positions to the right - done
-        int n = 1;
+        System.out.println(Arrays.toString(moveToRightOrLeft(arr5, moves)));
+
+    }
+
+    /**
+     * 7. **** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
+     * при этом метод должен сместить все элементымассива на n позиций. Для усложнения задачи нельзя пользоваться вспомогательными массивами.
+     *
+     * @param arr5
+     * @param moves
+     * @return
+     */
+    private static int[] moveToRightOrLeft(int[] arr5, int moves) {
+
+        // check if moves >= arr5.lengths needed
         int[] newArray = new int[arr5.length];
-
-        for (int i = 0, j = i + n; i < arr5.length; i++, j++) {
-            if(j < newArray.length){
-                newArray[j] = arr5[i];
-            }else {
-                for (int k = 0, l = arr5.length - n ; k < newArray.length - i; k++, l++) {
-                    newArray[k] = arr5[l];
+        if( moves >= 0 ) {
+            int n = moves;
+            for (int i = 0, j = i + n; i < arr5.length; i++, j++) {
+                if (j < newArray.length) {
+                    newArray[j] = arr5[i];
+                } else {
+                    for (int k = 0, l = arr5.length - n; k < newArray.length - i; k++, l++) {
+                        newArray[k] = arr5[l];
+                    }
+                }
+            }
+        } else {
+            int n = Math.abs(moves);
+            for (int i = 0, j = i + n; i < arr5.length; i++, j++) {
+                if(j < newArray.length){
+                    newArray[i] = arr5[j];
+                }else {
+                    for (int k = 0, l = arr5.length - n; k < newArray.length - i; k++, l++) {
+                        newArray[l] = arr5[k];
+                    }
                 }
             }
         }
-        System.out.println(Arrays.toString(newArray));
-
-        // move n positions to the left - to be done
-
+        return newArray;
     }
 
     /**
