@@ -52,6 +52,15 @@ public class TicTacToe {
         } while (!isValidCell(x, y) || !isEmptyCell(x, y));
         field[y][x] = DOT_HUMAN;
     }
+
+    private static boolean isEmptyCell(int x, int y) {
+        return field[y][x] == DOT_EMPTY;
+    }
+
+    private static boolean isValidCell(int x, int y) {
+        return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
+    }
+    
     public static void main(String[] args) {
 
     }
