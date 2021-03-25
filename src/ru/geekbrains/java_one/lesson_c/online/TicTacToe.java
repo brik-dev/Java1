@@ -42,7 +42,16 @@ public class TicTacToe {
             System.out.print("-");
         System.out.println();
     }
-    
+    private static void humanTurn() {
+        int x;
+        int y;
+        do {
+            System.out.println("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ñ‹ Ñ…Ð¾Ð´Ð° X Ð¸ Y (Ð¾Ñ‚ 1 Ð´Ð¾ 3) Ñ‡ÐµÑ€ÐµÐ· Ð¿Ñ€Ð¾Ð±ÐµÐ» >>> ");
+            x = SCANNER.nextInt() - 1;
+            y = SCANNER.nextInt() - 1;
+        } while (!isValidCell(x, y) || !isEmptyCell(x, y));
+        field[y][x] = DOT_HUMAN;
+    }
     public static void main(String[] args) {
 
     }
