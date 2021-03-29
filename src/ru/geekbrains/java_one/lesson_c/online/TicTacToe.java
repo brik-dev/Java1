@@ -123,7 +123,7 @@ public class TicTacToe {
         } while (answer.equals("y"));
         SCANNER.close();
     }
-1
+
     private static boolean checkEndGame(char dot, String winMessage) {
         printField();
         if (checkWin(dot)) {
