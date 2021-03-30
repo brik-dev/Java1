@@ -187,7 +187,7 @@ public class Main {
      */
     private static int[] multiplyArray(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i] > 6){
+            if(arr[i] < 6){
                 arr[i] = arr[i] * 2;
             }
         }
@@ -214,6 +214,8 @@ public class Main {
     private static int[] revertArray(int[] arr) {
         for (int i = 0; i < arr.length; i++){
             arr[i] = (arr[i] == 1) ? 0 : 1;
+            arr[i] = 1 - arr[i];
+            arr[i] ^= 1;
         }
         return arr;
     }
