@@ -66,5 +66,24 @@ public class HelloHomework {
         return min;
     }
 
+    private static void crossFill(int[][] arr){
+        for (int i = 0; i < arr.length; i++) {
+            arr[i][i] = 1;
+            arr[i][arr.length - 1 - i] = 1;
+        }
+    }
+
+    private static boolean checkBalance(int[] array){
+        int right = 0, left = 0;
+        for (int i = 0; i < array.length; i++) {
+            left += array[i];
+            for (int j = i + 1; j < array.length; j++)
+                right += array[j];
+            if(left == right) return true;
+            right = 0;
+        }
+        return false;
+    }
+
 }
 
