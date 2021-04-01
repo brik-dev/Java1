@@ -85,5 +85,22 @@ public class HelloHomework {
         return false;
     }
 
+    private static boolean checkBalance2(int[] array){ // optimised with check ?sum - L == R -> TODO: to be tested
+        int sum = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        int left = 0;
+        int right = sum - array[0];
+        for (int i = 0; i < array.length; i++) {
+            left += array[i];
+            if((sum - left) == right) return true;
+            right -= array[i];
+        }
+
+        return false;
+    }
+
 }
 
