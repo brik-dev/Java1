@@ -3,11 +3,9 @@ package ru.geekbrains.java_one.lesson_b.online;
 Homework check with the prof
  */
 
+import java.util.Arrays;
+
 public class HelloHomework {
-
-    public static void main(String[] args) {
-
-    }
 
     private static void change(int[] array) { // не нужно возвращать массив, так как мы передаем ссылку на массив в метод. Метод менят сам массив.
         for (int i = 0; i < array.length; i++){
@@ -102,11 +100,54 @@ public class HelloHomework {
         return false;
     }
 
+    private static void shifter(int[] array, int value) {
+        boolean direction;
+        if (value < 0) {
+            direction = true;
+            value = -value;
+        } else {
+            direction = false;
+        }
+        value %= array.length;
+        int lastIndex = array.length - 1;
+        for (int i = 0; i < value; i++) {
+            int temp = (direction) ? array[0] : array[lastIndex];
+            for (int j = 0; j < lastIndex; j++) {
+                if (direction)
+                    array[j] = array[j + 1];
+                else
+                    array[lastIndex - j] = array[lastIndex - j - 1];
+            }
+            if (direction)
+                array[lastIndex] = temp;
+            else
+                array[0] = temp;
+        }
+    }
+
+    private static void shifter2(int[] array, int value) {
+        boolean direction = value < 0;
+        if (direction) value = -value;
+
+        value %= array.length;
+        int lastIndex = array.length - 1;
+        for (int i = 0; i < value; i++) {
+            int temp = (direction) ? array[0] : array[lastIndex];
+            if (direction) {
+                System.arraycopy(array, 1, array, 0, lastIndex);
+                array[lastIndex] = temp;
+            } else {
+                System.arraycopy(array, 0, array, 1, lastIndex);
+                array[0] = temp;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         /*
-         * 1.   Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¼Ð°ÑÑÐ¸Ð², ÑÐ¾ÑÑ‚Ð¾ÑÑ‰Ð¸Ð¹ Ð¸Ð· ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² 0 Ð¸ 1,
-         * Ð½Ð°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ]. Ð¡ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Ñ†Ð¸ÐºÐ»Ð°
-         * Ð¸ ÑƒÑÐ»Ð¾Ð²Ð¸Ñ Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ 0 Ð½Ð° 1, 1 Ð½Ð° 0;
+         * 1 Задать целочисленный массив, состоящий из элементов 0 и 1.
+         * Например: [ 1, 1, 0, 0, 1, 0, 1, 1, 0, 0 ].
+         * Написать метод, заменяющий в принятом массиве 0 на 1, 1 на 0;
          */
         int[] bin = {1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0};
         System.out.println("1. Before:\t" + Arrays.toString(bin));
@@ -114,17 +155,17 @@ public class HelloHomework {
         System.out.println("1. After:\t" + Arrays.toString(bin));
 
         /*
-         * 2.   Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ Ð¿ÑƒÑÑ‚Ð¾Ð¹ Ñ†ÐµÐ»Ð¾Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² Ñ€Ð°Ð·Ð¼ÐµÑ€Ð¾Ð¼ 8.
-         * Ð¡ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Ñ†Ð¸ÐºÐ»Ð° Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ ÐµÐ³Ð¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÑÐ¼Ð¸
-         * 0 3 6 9 12 15 18 21;
+         * 2 Задать пустой целочисленный массив размером 8.
+         * Написать метод, который помощью цикла
+         * заполнит его значениями 1 4 7 10 13 16 19 22;
          */
         int[] arrInt = new int[8];
         fillIn(arrInt, 3, 1);
         System.out.println("2. Filled with cycle:\t" + Arrays.toString(arrInt));
 
         /*
-         * 3.   Ð—Ð°Ð´Ð°Ñ‚ÑŒ Ð¼Ð°ÑÑÐ¸Ð² int[] mas = { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 };
-         * Ð¿Ñ€Ð¾Ð¹Ñ‚Ð¸ Ð¿Ð¾ Ð½ÐµÐ¼Ñƒ Ñ†Ð¸ÐºÐ»Ð¾Ð¼, Ð¸ Ñ‡Ð¸ÑÐ»Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¼ÐµÐ½ÑŒÑˆÐµ 6, ÑƒÐ¼Ð½Ð¾Ð¶Ð¸Ñ‚ÑŒ Ð½Ð° 2.
+         * 3 Задать массив [ 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 ],
+         * написать метод, принимающий на вход массив и умножающий числа меньше 6 на 2;
          */
         int[] mas = { 1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1 };
         System.out.println("3. Before:\t" + Arrays.toString(mas));
@@ -132,9 +173,8 @@ public class HelloHomework {
         System.out.println("3. After:\t" + Arrays.toString(mas));
 
         /*
-         * 4.   Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ ÐºÐ²Ð°Ð´Ñ€Ð°Ñ‚Ð½Ñ‹Ð¹ Ð´Ð²ÑƒÐ¼ÐµÑ€Ð½Ñ‹Ð¹ Ñ†ÐµÐ»Ð¾Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ð¹
-         * Ð¼Ð°ÑÑÐ¸Ð² (ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð¾Ðº Ð¸ ÑÑ‚Ð¾Ð»Ð±Ñ†Ð¾Ð² Ð¾Ð´Ð¸Ð½Ð°ÐºÐ¾Ð²Ð¾Ðµ),
-         * Ð¸ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ Ñ†Ð¸ÐºÐ»Ð°(-Ð¾Ð²) Ð·Ð°Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÑŒ ÐµÐ³Ð¾ Ð´Ð¸Ð°Ð³Ð¾Ð½Ð°Ð»ÑŒÐ½Ñ‹Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ ÐµÐ´Ð¸Ð½Ð¸Ñ†Ð°Ð¼Ð¸;
+         * 5 * Создать квадратный целочисленный массив (количество строк и столбцов одинаковое),
+         * заполнить его диагональные элементы единицами, используя цикл(ы);
          */
         final int side = 10;
         int[][] dArr = new int[side][side];
@@ -147,32 +187,25 @@ public class HelloHomework {
         }
 
         /*
-         * 5.	* Ð—Ð°Ð´Ð°Ñ‚ÑŒ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² Ð¸ Ð½Ð°Ð¹Ñ‚Ð¸ Ð² Ð½ÐµÐ¼
-         * Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð¸ Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹;
+         * 4 Задать одномерный массив. Написать методы поиска в нём минимального и максимального элемента;
          */
         System.out.println("5. Maximum: " + findMax(mas));
         System.out.println("5. Minimum: " + findMin(mas));
 
         /*
-         * 6.   ** ÐÐ°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð¼ÐµÑ‚Ð¾Ð´, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð¿ÐµÑ€ÐµÐ´Ð°ÐµÑ‚ÑÑ Ð½Ðµ Ð¿ÑƒÑÑ‚Ð¾Ð¹
-         * Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ð¹ Ñ†ÐµÐ»Ð¾Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð², Ð¼ÐµÑ‚Ð¾Ð´ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ
-         * true ÐµÑÐ»Ð¸ Ð² Ð¼Ð°ÑÑÐ¸Ð²Ðµ ÐµÑÑ‚ÑŒ Ð¼ÐµÑÑ‚Ð¾, Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼ ÑÑƒÐ¼Ð¼Ð°
-         * Ð»ÐµÐ²Ð¾Ð¹ Ð¸ Ð¿Ñ€Ð°Ð²Ð¾Ð¹ Ñ‡Ð°ÑÑ‚Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ñ€Ð°Ð²Ð½Ñ‹.
-         * ÐŸÑ€Ð¸Ð¼ÐµÑ€Ñ‹: checkBalance([1, 1, 1, || 2, 1]) â†’ true,
-         * checkBalance ([2, 1, 1, 2, 1]) â†’ false,
-         * checkBalance ([10, || 10]) â†’ true,
-         * Ð³Ñ€Ð°Ð½Ð¸Ñ†Ð° Ð¿Ð¾ÐºÐ°Ð·Ð°Ð½Ð° ÑÐ¸Ð¼Ð²Ð¾Ð»Ð°Ð¼Ð¸ ||, ÑÑ‚Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ‹ Ð² Ð¼Ð°ÑÑÐ¸Ð² Ð½Ðµ Ð²Ñ…Ð¾Ð´ÑÑ‚.
+         * 6 ** Написать метод, в который передается не пустой одномерный целочисленный массив,
+         * метод должен вернуть true если в массиве есть место, в котором сумма левой и правой части массива равны.
+         * Примеры: checkBalance([1, 1, 1, 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, 1, 2, 3, 4]) → true.
          */
         int[] balance = {0};
         System.out.print("6. Is the " + Arrays.toString(balance) + " balanced? ");
         System.out.println(checkBalance(balance));
 
         /*
-         * 7.    *** ÐÐ°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð¼ÐµÑ‚Ð¾Ð´, ÐºÐ¾Ñ‚Ð¾Ñ€Ð¼Ñƒ Ð½Ð° Ð²Ñ…Ð¾Ð´ Ð¿Ð¾Ð´Ð°Ñ‘Ñ‚ÑÑ Ð¾Ð´Ð½Ð¾Ð¼ÐµÑ€Ð½Ñ‹Ð¹
-         * Ð¼Ð°ÑÑÐ¸Ð² Ð¸ Ñ‡Ð¸ÑÐ»Ð¾ n (Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð»Ð¾Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼, Ð¸Ð»Ð¸ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼),
-         * Ð¿Ñ€Ð¸ ÑÑ‚Ð¾Ð¼ Ð¼ÐµÑ‚Ð¾Ð´ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¼ÐµÑÑ‚Ð¸Ñ‚ÑŒ Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð½Ð° n Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¹.
-         *
-         * **** Ð”Ð»Ñ ÑƒÑÐ»Ð¾Ð¶Ð½ÐµÐ½Ð¸Ñ Ð·Ð°Ð´Ð°Ñ‡Ð¸ Ð½ÐµÐ»ÑŒÐ·Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒÑÑ Ð²ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼Ð¸ Ð¼Ð°ÑÑÐ¸Ð²Ð°Ð¼Ð¸
+         * 7. **** Написать метод, которому на вход подается одномерный массив и
+         * число n (может быть положительным, или отрицательным),
+         * при этом метод должен сместить все элементымассива на n позиций.
+         * Для усложнения задачи нельзя пользоваться вспомогательными массивами.
          */
         int[] shiftArray = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         System.out.println("7.  " + Arrays.toString(shiftArray));
@@ -183,5 +216,18 @@ public class HelloHomework {
         
     }
 
+    private static void shifter3(int[] array, int value) {
+        value %= array.length;
+        if (value == 0) return;
+        boolean dir = value < 0;
+        if (dir) value = -value;
+        int shift = (dir) ? array.length - value : value;
+
+        for (int i = 0; i < shift; i++) {
+            int temp = array[array.length - 1];
+            System.arraycopy(array, 0, array, 1, array.length - 1);
+            array[0] = temp;
+        }
+    }
 }
 
