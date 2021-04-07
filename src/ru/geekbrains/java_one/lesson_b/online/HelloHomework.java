@@ -90,13 +90,12 @@ public class HelloHomework {
             sum += array[i];
         }
         int left = 0;
-        int right = sum - array[0];
+        int right = sum;
         for (int i = 0; i < array.length; i++) {
-            left += array[i];
-            if((sum - left) == right) return true;
             right -= array[i];
+            left += array[i];
+            if(left == right) return true;
         }
-
         return false;
     }
 
@@ -197,9 +196,9 @@ public class HelloHomework {
          * метод должен вернуть true если в массиве есть место, в котором сумма левой и правой части массива равны.
          * Примеры: checkBalance([1, 1, 1, 2, 1]) → true, checkBalance ([2, 1, 1, 2, 1]) → false, checkBalance ([10, 1, 2, 3, 4]) → true.
          */
-        int[] balance = {0};
+        int[] balance = {10, 2, 3, 4};
         System.out.print("6. Is the " + Arrays.toString(balance) + " balanced? ");
-        System.out.println(checkBalance(balance));
+        System.out.println(checkBalance(balance) + "\t" + checkBalance2(balance));
 
         /*
          * 7. **** Написать метод, которому на вход подается одномерный массив и
