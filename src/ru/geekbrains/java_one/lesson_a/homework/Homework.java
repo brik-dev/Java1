@@ -1,4 +1,4 @@
-package ru.geekbrains.java_one.lesson_one.homework;
+package ru.geekbrains.java_one.lesson_a.homework;
 
 /**
  * 1. Написать метод вычисляющий выражение a * (b + (c / d)) и возвращающий результат с плавающей точкой, где a, b, c, d – целочисленные входные параметры этого метода;

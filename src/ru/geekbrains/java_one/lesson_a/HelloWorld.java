@@ -1,4 +1,4 @@
-package ru.geekbrains.java_one.lesson_one.online;
+package ru.geekbrains.java_one.lesson_a;
 
 public class HelloWorld {
     //DRY = don't repeat yourself;
