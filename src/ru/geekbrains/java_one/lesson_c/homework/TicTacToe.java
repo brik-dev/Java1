@@ -60,7 +60,7 @@ public class TicTacToe {
         int x;
         int y;
         do {
-            System.out.println("Введите координаты хода X и Y  (от 1 до 3) через пробел >>>");
+            System.out.println("Enter the coordinates X и Y (from 1 to 3) for your turn with a space in between >>>");
             x = SCANNER.nextInt() - 1;
             y = SCANNER.nextInt() - 1;
         } while (!isValidCell(x, y) || !isEmptyCell(x, y));
