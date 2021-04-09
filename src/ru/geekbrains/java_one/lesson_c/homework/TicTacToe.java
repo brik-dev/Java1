@@ -19,10 +19,11 @@ public class TicTacToe {
     private static int fieldSizeY;
     private static int fieldSizeX;
     private static char[][] field;
+    private static int winCombination = 4;
 
     private static void initField() {
-        fieldSizeX = 3;
-        fieldSizeY = 3;
+        fieldSizeX = 5;
+        fieldSizeY = 5;
         field = new char[fieldSizeY][fieldSizeX];
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
@@ -101,7 +102,7 @@ public class TicTacToe {
             for (int j = 0; j < field.length; j++) {
                 if (field[i][j] == c) count++;
             }
-            if (count == 3) return true;
+            if (count == winCombination) return true;
             count = 0;
         }
 //        if (field[0][0] == c && field[0][1] == c && field[0][2] == c) return true;
@@ -113,7 +114,7 @@ public class TicTacToe {
             for (int i = 0; i < field.length; i++) {
                 if (field[i][j] == c) count++;
             }
-            if (count == 3) return true;
+            if (count == winCombination) return true;
             count = 0;
         }
 //        if (field[0][0] == c && field[1][0] == c && field[2][0] == c) return true;
@@ -124,7 +125,7 @@ public class TicTacToe {
 
         for (int i = 0; i < field.length; i++) {
             if (field[i][i] == c) count++;
-            if (count == 3) return true;
+            if (count == winCombination) return true;
             count = 0;
         }
 //        if (field[0][0] == c && field[1][1] == c && field[2][2] == c) return true;
