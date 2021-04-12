@@ -61,7 +61,7 @@ public class TicTacToe {
         int x;
         int y;
         do {
-            System.out.println("Enter the coordinates X и Y (from 1 to 3) for your turn with a space in between >>>");
+            System.out.println("Enter the coordinates X и Y (from 1 to 5) for your turn with a space in between >>>");
             x = SCANNER.nextInt() - 1;
             y = SCANNER.nextInt() - 1;
         } while (!isValidCell(x, y) || !isEmptyCell(x, y));
@@ -80,6 +80,19 @@ public class TicTacToe {
         int x;
         int y;
         do {
+            x = RANDOM.nextInt(fieldSizeX);
+            y = RANDOM.nextInt(fieldSizeY);
+        } while (!isEmptyCell(x, y));
+        field[y][x] = DOT_AI;
+    }
+
+    private static void aiTurn(int x, int y) {
+        int humanX = x;
+        int humanY = y;
+        int aiX;
+        int aiY;
+        do {
+            checkFieldFromHuman();
             x = RANDOM.nextInt(fieldSizeX);
             y = RANDOM.nextInt(fieldSizeY);
         } while (!isEmptyCell(x, y));
