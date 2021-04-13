@@ -76,23 +76,34 @@ public class TicTacToe {
         return x >= 0 && x < fieldSizeX && y >= 0 && y < fieldSizeY;
     }
 
+    // aiTurn random x y
+//    private static void aiTurn() {
+//        int x;
+//        int y;
+//        do {
+//            x = RANDOM.nextInt(fieldSizeX);
+//            y = RANDOM.nextInt(fieldSizeY);
+//        } while (!isEmptyCell(x, y));
+//        field[y][x] = DOT_AI;
+//    }
+
+    //aiTurn intelligent xy
     private static void aiTurn() {
         int x;
         int y;
-        do {
-            x = RANDOM.nextInt(fieldSizeX);
-            y = RANDOM.nextInt(fieldSizeY);
-        } while (!isEmptyCell(x, y));
-        field[y][x] = DOT_AI;
-    }
 
-    private static void aiTurn(int x, int y) {
-        int humanX = x;
-        int humanY = y;
-        int aiX;
-        int aiY;
         do {
-            checkFieldFromHuman();
+            for (int i = 0; i < fieldSizeY; i++) {
+                for (int j = 0; j < fieldSizeX; j++) {
+                    if (field[i][j] == 'X'){
+                        // checkForDiagonalPair()
+                        // if false -> checkforHorizontalPair()
+                        //      if true x = i + ?, y + ?// find pattern
+                        // if false -> x = i + 1, y = j + 1 // increase in diagonal
+                        //else ...?
+                    }
+                }
+            }
             x = RANDOM.nextInt(fieldSizeX);
             y = RANDOM.nextInt(fieldSizeY);
         } while (!isEmptyCell(x, y));
