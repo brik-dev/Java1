@@ -19,11 +19,11 @@ public class TicTacToe {
     private static int fieldSizeY;
     private static int fieldSizeX;
     private static char[][] field;
-    private static int winCombination = 4;
+    private static int winCombination = 3;
 
     private static void initField() {
-        fieldSizeX = 5;
-        fieldSizeY = 5;
+        fieldSizeX = 3;
+        fieldSizeY = 3;
         field = new char[fieldSizeY][fieldSizeX];
         for (int y = 0; y < fieldSizeY; y++) {
             for (int x = 0; x < fieldSizeX; x++) {
@@ -87,28 +87,60 @@ public class TicTacToe {
 //        field[y][x] = DOT_AI;
 //    }
 
-    //aiTurn intelligent xy
+    //aiTurn intelligent
     private static void aiTurn() {
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
 
         do {
             for (int i = 0; i < fieldSizeY; i++) {
                 for (int j = 0; j < fieldSizeX; j++) {
                     if (field[i][j] == 'X'){
-                        // checkForDiagonalPair()
-                        // if false -> checkforHorizontalPair()
-                        //      if true x = i + ?, y + ?// find pattern
-                        // if false -> x = i + 1, y = j + 1 // increase in diagonal
-                        //else ...?
+
+                        if(checkDiagonal(i, j)){
+                            x = j + 1;
+                            y = i + 1;
+                        } else if (checkVertical(i, j)){
+                            x = j;
+                            y = i + 1;
+                        } else if (checkHorizontal(i, j)){
+                            x = j + 1;
+                            y = i;
+                        }else{
+                            x = j + 1;
+                            y = i + 1;
+                        }
                     }
                 }
             }
-            x = RANDOM.nextInt(fieldSizeX);
-            y = RANDOM.nextInt(fieldSizeY);
         } while (!isEmptyCell(x, y));
         field[y][x] = DOT_AI;
     }
+
+    private static boolean checkDiagonal(int x, int y){
+        if(x < 0 || y < 0){
+            return field[y - 1][x - 1] == DOT_HUMAN;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean checkVertical(int x, int y){
+        if(x < 0 || y < 0){
+            return field[y - 1][x] == DOT_HUMAN;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean checkHorizontal(int x, int y){
+        if(x < 0 || y < 0){
+            return field[y][x - 1] == DOT_HUMAN;
+        } else {
+            return false;
+        }
+    }
+
 
     private static boolean checkDraw() {
         for (int y = 0; y < fieldSizeY; y++) {
