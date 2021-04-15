@@ -88,34 +88,34 @@ public class TicTacToe {
 //    }
 
     //aiTurn intelligent
-    private static void aiTurn() {
-        int x = 0;
-        int y = 0;
-
-        do {
-            for (int i = 0; i < fieldSizeY; i++) {
-                for (int j = 0; j < fieldSizeX; j++) {
-                    if (field[i][j] == 'X'){
-
-                        if(checkDiagonal(i, j)){
-                            x = j + 1;
-                            y = i + 1;
-                        } else if (checkVertical(i, j)){
-                            x = j;
-                            y = i + 1;
-                        } else if (checkHorizontal(i, j)){
-                            x = j + 1;
-                            y = i;
-                        }else{
-                            x = j + 1;
-                            y = i + 1;
-                        }
-                    }
-                }
-            }
-        } while (!isEmptyCell(x, y));
-        field[y][x] = DOT_AI;
-    }
+//    private static void aiTurn() {
+//        int x = 0;
+//        int y = 0;
+//
+//        do {
+//            for (int i = 0; i < fieldSizeY; i++) {
+//                for (int j = 0; j < fieldSizeX; j++) {
+//                    if (field[i][j] == 'X'){
+//
+//                        if(checkDiagonal(i, j)){
+//                            x = j + 1;
+//                            y = i + 1;
+//                        } else if (checkVertical(i, j)){
+//                            x = j;
+//                            y = i + 1;
+//                        } else if (checkHorizontal(i, j)){
+//                            x = j + 1;
+//                            y = i;
+//                        }else{
+//                            x = j + 1;
+//                            y = i + 1;
+//                        }
+//                    }
+//                }
+//            }
+//        } while (!isEmptyCell(x, y));
+//        field[y][x] = DOT_AI;
+//    }
 
     private static boolean checkDiagonal(int x, int y){
         if(x < 0 || y < 0){
@@ -140,6 +140,26 @@ public class TicTacToe {
             return false;
         }
     }
+
+    //aiTurn intelligent with known humanX and humanY   
+    private static void aiTurn(int j, int i) {
+        int humanX = j;
+        int humanY = i;
+        
+        int aiX = 0;
+        int aiY = 0;
+
+        if(humanX == 0 & humanY == 0){
+            for (j = 0; j < fieldSizeX; j++) {
+                
+            }
+        }
+        do {
+            
+        } while (!isEmptyCell(aiX, aiY) && isValidCell(aiX, aiY));
+        field[aiY][aiX] = DOT_AI;
+    }
+
 
 
     private static boolean checkDraw() {
@@ -199,7 +219,7 @@ public class TicTacToe {
             while (true) {
                 humanTurn();
                 if (checkEndGame(DOT_HUMAN, "Human win!")) break;
-                aiTurn();
+                //aiTurn();
                 if (checkEndGame(DOT_AI, "Computer win!")) break;
             }
             System.out.println("Wanna play again? (y/n) >>> ");
