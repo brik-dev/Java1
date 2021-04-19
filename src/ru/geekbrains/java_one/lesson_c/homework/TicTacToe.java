@@ -88,36 +88,44 @@ public class TicTacToe {
 //    }
 
     //aiTurn intelligent
-//    private static void aiTurn() {
-//        int x = 0;
-//        int y = 0;
-//
-//        do {
-//            for (int i = 0; i < fieldSizeY; i++) {
-//                for (int j = 0; j < fieldSizeX; j++) {
-//                    if (field[i][j] == 'X'){
-//
-//                        if(checkDiagonal(i, j)){
-//                            x = j + 1;
-//                            y = i + 1;
-//                        } else if (checkVertical(i, j)){
-//                            x = j;
-//                            y = i + 1;
-//                        } else if (checkHorizontal(i, j)){
-//                            x = j + 1;
-//                            y = i;
-//                        }else{
-//                            x = j + 1;
-//                            y = i + 1;
-//                        }
-//                    }
-//                }
-//            }
-//        } while (!isEmptyCell(x, y));
-//        field[y][x] = DOT_AI;
-//    }
+    private static void aiTurn() {
+        int x = 0;
+        int y = 0;
 
-    private static int checkDiagonalForHumanTurn(){
+        int diagonal = checkDiagonal();
+        int vertical = checkVertical();
+        int horizontal = checkHorizontal();
+
+        if(diagonal > vertical || diagonal > horizontal){
+            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+                if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j+1) && (!isEmptyCell(i+1, j+1))){
+                    x = i+1;
+                    y = j+1;
+                }
+            }
+        } else if (vertical > diagonal || vertical > horizontal){
+            for (int j = 0; j < fieldSizeX; j++) {
+                for (int i = 0; i < fieldSizeY; i++) {
+                    if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j) && (!isEmptyCell(i+1, j))){
+                        x = i;
+                        y = j+1;
+                    }
+                }
+            }
+        }else{
+            for (int i = 0; i < fieldSizeX; i++) {
+                for (int j = 0; j < fieldSizeY; j++) {
+                    if(field[i][j] == DOT_HUMAN && isValidCell(i, j+1) && (!isEmptyCell(i, j+1))){
+                        x = i+1;
+                        y = j;
+                    }
+                }
+            }
+        }
+        field[y][x] = DOT_AI;
+    }
+
+    private static int checkDiagonal(){
         int countXinDiagonal = 0;
         for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
             if(field[i][j] == DOT_HUMAN) countXinDiagonal++;
@@ -125,20 +133,24 @@ public class TicTacToe {
         return countXinDiagonal;
     }
 
-    private static boolean checkVertical(int x, int y){
-        if(x < 0 || y < 0){
-            return field[y - 1][x] == DOT_HUMAN;
-        } else {
-            return false;
+    private static int checkVertical(){
+        int countXinVertical = 0;
+        for (int j = 0; j < fieldSizeX; j++) {
+            for (int i = 0; i < fieldSizeY; i++) {
+                if(field[i][j] == DOT_HUMAN) countXinVertical++;
+            }
         }
+        return countXinVertical;
     }
 
-    private static boolean checkHorizontal(int x, int y){
-        if(x < 0 || y < 0){
-            return field[y][x - 1] == DOT_HUMAN;
-        } else {
-            return false;
+    private static int checkHorizontal(){
+        int countXinHorizontal = 0;
+        for (int i = 0; i < fieldSizeX; i++) {
+            for (int j = 0; j < fieldSizeY; j++) {
+                if(field[i][j] == DOT_HUMAN) countXinHorizontal++;
+            }
         }
+        return countXinHorizontal;
     }
 
     //aiTurn intelligent with known humanX and humanY   
