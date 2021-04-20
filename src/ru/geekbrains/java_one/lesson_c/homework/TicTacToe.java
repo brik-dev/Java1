@@ -96,14 +96,14 @@ public class TicTacToe {
         int vertical = checkVertical();
         int horizontal = checkHorizontal();
 
-        if(diagonal > vertical || diagonal > horizontal){
+        if(diagonal == (winCombination - 1)) {
             for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
                 if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j+1) && (!isEmptyCell(i+1, j+1))){
                     x = i+1;
                     y = j+1;
                 }
             }
-        } else if (vertical > diagonal || vertical > horizontal){
+        } else if (vertical == (winCombination - 1)) {
             for (int j = 0; j < fieldSizeX; j++) {
                 for (int i = 0; i < fieldSizeY; i++) {
                     if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j) && (!isEmptyCell(i+1, j))){
@@ -112,7 +112,7 @@ public class TicTacToe {
                     }
                 }
             }
-        }else{
+        }else if (horizontal == (winCombination - 1)) {
             for (int i = 0; i < fieldSizeX; i++) {
                 for (int j = 0; j < fieldSizeY; j++) {
                     if(field[i][j] == DOT_HUMAN && isValidCell(i, j+1) && (!isEmptyCell(i, j+1))){
@@ -121,7 +121,40 @@ public class TicTacToe {
                     }
                 }
             }
+        } else if(diagonal == (winCombination - 2)) {
+            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+                if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j+1) && (!isEmptyCell(i+1, j+1))){
+                    x = i+1;
+                    y = j+1;
+                }
+            }
+        } else if (vertical == (winCombination - 2)) {
+            for (int j = 0; j < fieldSizeX; j++) {
+                for (int i = 0; i < fieldSizeY; i++) {
+                    if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j) && (!isEmptyCell(i+1, j))){
+                        x = i;
+                        y = j+1;
+                    }
+                }
+            }
+        }else if (horizontal == (winCombination - 2)) {
+            for (int i = 0; i < fieldSizeX; i++) {
+                for (int j = 0; j < fieldSizeY; j++) {
+                    if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
+                        x = i + 1;
+                        y = j;
+                    }
+                }
+            }
+        }else {
+            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+                if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
+                    x = i + 1;
+                    y = j + 1;
+                }
+            }
         }
+
         field[y][x] = DOT_AI;
     }
 
