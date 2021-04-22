@@ -57,6 +57,7 @@ public class TicTacToe {
 //            System.out.println();
 //        }
     }
+
     private static void humanTurn() {
         int x;
         int y;
@@ -91,198 +92,214 @@ public class TicTacToe {
     private static void aiTurn() {
         int x = 0;
         int y = 0;
+        int diagonal;
 
-        int diagonal = checkDiagonal();
-        int vertical = checkVertical();
-        int horizontal = checkHorizontal();
-
-        if(diagonal == (winCombination - 1)) {
-            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-                if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j+1) && (!isEmptyCell(i+1, j+1))){
-                    x = i+1;
-                    y = j+1;
-                }
-            }
-        } else if (vertical == (winCombination - 1)) {
+        for (int i = 0; i < fieldSizeY; i++) {
             for (int j = 0; j < fieldSizeX; j++) {
-                for (int i = 0; i < fieldSizeY; i++) {
-                    if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j) && (!isEmptyCell(i+1, j))){
-                        x = i;
-                        y = j+1;
+                if (field[i][j] == DOT_HUMAN) {
+                    diagonal = checkDiagonal(i, j);
+                    switch (diagonal) {
+                        case 2:
+                            if (isEmptyCell(i + 2, j + 2) && isValidCell(i + 2, j + 2)) {
+                                x = i + 2;
+                                y = j + 2;
+                            } else if (isEmptyCell(i - 2, j - 2) && isValidCell(i - 2, j - 2)) {
+                                x = i - 2;
+                                y = j - 2;
+                            }
+                        case 1:
+                            if (isEmptyCell(i + 1, j + 1) && isValidCell(i + 1, j + 1)) {
+                                x = i + 1;
+                                y = j + 1;
+                            } else if (isEmptyCell(i - 1, j - 1) && isValidCell(i - 1, j - 1)) {
+                                x = i - 1;
+                                y = j - 1;
+                            }
+                        default:
+                            do {
+                                x = RANDOM.nextInt(fieldSizeX);
+                                y = RANDOM.nextInt(fieldSizeY);
+                            } while (!isEmptyCell(x, y));
                     }
-                }
-            }
-        }else if (horizontal == (winCombination - 1)) {
-            for (int i = 0; i < fieldSizeX; i++) {
-                for (int j = 0; j < fieldSizeY; j++) {
-                    if(field[i][j] == DOT_HUMAN && isValidCell(i, j+1) && (!isEmptyCell(i, j+1))){
-                        x = i+1;
-                        y = j;
-                    }
-                }
-            }
-        } else if(diagonal == (winCombination - 2)) {
-            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-                if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j+1) && (!isEmptyCell(i+1, j+1))){
-                    x = i+1;
-                    y = j+1;
-                }
-            }
-        } else if (vertical == (winCombination - 2)) {
-            for (int j = 0; j < fieldSizeX; j++) {
-                for (int i = 0; i < fieldSizeY; i++) {
-                    if(field[i][j] == DOT_HUMAN && isValidCell(i+1, j) && (!isEmptyCell(i+1, j))){
-                        x = i;
-                        y = j+1;
-                    }
-                }
-            }
-        }else if (horizontal == (winCombination - 2)) {
-            for (int i = 0; i < fieldSizeX; i++) {
-                for (int j = 0; j < fieldSizeY; j++) {
-                    if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
-                        x = i + 1;
-                        y = j;
-                    }
-                }
-            }
-        }else {
-            for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-                if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
-                    x = i + 1;
-                    y = j + 1;
+                    field[y][x] = DOT_AI;
                 }
             }
         }
-
-        field[y][x] = DOT_AI;
     }
 
-    private static int checkDiagonal(){
-        int countXinDiagonal = 0;
-        for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-            if(field[i][j] == DOT_HUMAN) countXinDiagonal++;
-        }
-        return countXinDiagonal;
-    }
 
-    private static int checkVertical(){
-        int countXinVertical = 0;
-        for (int j = 0; j < fieldSizeX; j++) {
-            for (int i = 0; i < fieldSizeY; i++) {
-                if(field[i][j] == DOT_HUMAN) countXinVertical++;
-            }
-        }
-        return countXinVertical;
-    }
-
-    private static int checkHorizontal(){
-        int countXinHorizontal = 0;
-        for (int i = 0; i < fieldSizeX; i++) {
-            for (int j = 0; j < fieldSizeY; j++) {
-                if(field[i][j] == DOT_HUMAN) countXinHorizontal++;
-            }
-        }
-        return countXinHorizontal;
-    }
-
-    //aiTurn intelligent with known humanX and humanY   
-//    private static void aiTurn(int j, int i) {
-//        int humanX = j;
-//        int humanY = i;
+//            int vertical = checkVertical();
+//            int horizontal = checkHorizontal();
 //
-//        int aiX = 0;
-//        int aiY = 0;
-//
-//        if(humanX == 0 & humanY == 0){
-//            for (j = 0; j < fieldSizeX; j++) {
-//
+//            if (diagonal == (winCombination - 1)) {
+//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
+//                        x = i + 1;
+//                        y = j + 1;
+//                    }
+//                }
+//            } else if (vertical == (winCombination - 1)) {
+//                for (int j = 0; j < fieldSizeX; j++) {
+//                    for (int i = 0; i < fieldSizeY; i++) {
+//                        if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j) && (!isEmptyCell(i + 1, j))) {
+//                            x = i;
+//                            y = j + 1;
+//                        }
+//                    }
+//                }
+//            } else if (horizontal == (winCombination - 1)) {
+//                for (int i = 0; i < fieldSizeX; i++) {
+//                    for (int j = 0; j < fieldSizeY; j++) {
+//                        if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
+//                            x = i + 1;
+//                            y = j;
+//                        }
+//                    }
+//                }
+//            } else if (diagonal == (winCombination - 2)) {
+//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
+//                        x = i + 1;
+//                        y = j + 1;
+//                    }
+//                }
+//            } else if (vertical == (winCombination - 2)) {
+//                for (int j = 0; j < fieldSizeX; j++) {
+//                    for (int i = 0; i < fieldSizeY; i++) {
+//                        if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j) && (!isEmptyCell(i + 1, j))) {
+//                            x = i;
+//                            y = j + 1;
+//                        }
+//                    }
+//                }
+//            } else if (horizontal == (winCombination - 2)) {
+//                for (int i = 0; i < fieldSizeX; i++) {
+//                    for (int j = 0; j < fieldSizeY; j++) {
+//                        if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
+//                            x = i + 1;
+//                            y = j;
+//                        }
+//                    }
+//                }
+//            } else {
+//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
+//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
+//                        x = i + 1;
+//                        y = j + 1;
+//                    }
+//                }
 //            }
+
+//            field[y][x] = DOT_AI;
 //        }
-//        do {
-//
-//        } while (!isEmptyCell(aiX, aiY) && isValidCell(aiX, aiY));
-//        field[aiY][aiX] = DOT_AI;
-//    }
 
-
-
-    private static boolean checkDraw() {
-        for (int y = 0; y < fieldSizeY; y++) {
-            for (int x = 0; x < fieldSizeX; x++) {
-                if (isEmptyCell(x, y)) return false;
+        private static int checkDiagonal ( int k, int l){
+            int countXinDiagonal = 1;
+            for (int i = k+1, j = l+1; i < fieldSizeY; i++, j++) {
+                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
             }
-        }
-        return true;
-    }
-
-    private static boolean checkWin(char c) {
-        // hor
-        int count = 0;
-        for (int i = 0; i < field.length; i++) {
-            for (int j = 0; j < field.length; j++) {
-                if (field[i][j] == c) count++;
+            for (int i = k-1, j = l-1; i >= 0; i--, j--) {
+                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
             }
-            if (count == winCombination) return true;
-            count = 0;
+            return countXinDiagonal;
         }
+
+        private static int checkVertical () {
+            int countXinVertical = 0;
+            for (int j = 0; j < fieldSizeX; j++) {
+                for (int i = 0; i < fieldSizeY; i++) {
+                    if (field[i][j] == DOT_HUMAN) countXinVertical++;
+                }
+            }
+            return countXinVertical;
+        }
+
+        private static int checkHorizontal () {
+            int countXinHorizontal = 0;
+            for (int i = 0; i < fieldSizeX; i++) {
+                for (int j = 0; j < fieldSizeY; j++) {
+                    if (field[i][j] == DOT_HUMAN) countXinHorizontal++;
+                }
+            }
+            return countXinHorizontal;
+        }
+
+        private static boolean checkDraw () {
+            for (int y = 0; y < fieldSizeY; y++) {
+                for (int x = 0; x < fieldSizeX; x++) {
+                    if (isEmptyCell(x, y)) return false;
+                }
+            }
+            return true;
+        }
+
+        private static boolean checkWin ( char c){
+            // hor
+            int count = 0;
+            for (int i = 0; i < field.length; i++) {
+                for (int j = 0; j < field.length; j++) {
+                    if (field[i][j] == c) count++;
+                }
+                if (count == winCombination) return true;
+                count = 0;
+            }
 //        if (field[0][0] == c && field[0][1] == c && field[0][2] == c) return true;
 //        if (field[1][0] == c && field[1][1] == c && field[1][2] == c) return true;
 //        if (field[2][0] == c && field[2][1] == c && field[2][2] == c) return true;
 
-        // ver
-        for (int j = 0; j < field.length; j++) {
-            for (int i = 0; i < field.length; i++) {
-                if (field[i][j] == c) count++;
+            // ver
+            for (int j = 0; j < field.length; j++) {
+                for (int i = 0; i < field.length; i++) {
+                    if (field[i][j] == c) count++;
+                }
+                if (count == winCombination) return true;
+                count = 0;
             }
-            if (count == winCombination) return true;
-            count = 0;
-        }
 //        if (field[0][0] == c && field[1][0] == c && field[2][0] == c) return true;
 //        if (field[0][1] == c && field[1][1] == c && field[2][1] == c) return true;
 //        if (field[0][2] == c && field[1][2] == c && field[2][2] == c) return true;
 
-        // dia
+            // dia
 
-        for (int i = 0; i < field.length; i++) {
-            if (field[i][i] == c) count++;
-            if (count == winCombination) return true;
-            count = 0;
-        }
+            for (int i = 0; i < field.length; i++) {
+                if (field[i][i] == c) count++;
+                if (count == winCombination) return true;
+                count = 0;
+            }
 //        if (field[0][0] == c && field[1][1] == c && field[2][2] == c) return true;
 //        if (field[0][2] == c && field[1][1] == c && field[2][0] == c) return true;
-        return false;
+            return false;
 
-    }
+        }
 
-    public static void main(String[] args) {
+        public static void main (String[]args){
 
-        initField();
-        printField();
-        String answer;
-        do {
-            while (true) {
-                humanTurn();
-                if (checkEndGame(DOT_HUMAN, "Human win!")) break;
-                aiTurn();
-                if (checkEndGame(DOT_AI, "Computer win!")) break;
+            initField();
+            printField();
+            String answer;
+            do {
+                while (true) {
+                    humanTurn();
+                    if (checkEndGame(DOT_HUMAN, "Human win!")) break;
+                    aiTurn();
+                    if (checkEndGame(DOT_AI, "Computer win!")) break;
+                }
+                System.out.println("Wanna play again? (y/n) >>> ");
+                answer = SCANNER.next();
+            } while (answer.equals("y"));
+            SCANNER.close();
+        }
+
+        private static boolean checkEndGame ( char dot, String winMessage){
+            printField();
+            if (checkWin(dot)) {
+                System.out.println(winMessage);
+                return true;
             }
-            System.out.println("Wanna play again? (y/n) >>> ");
-            answer = SCANNER.next();
-        } while (answer.equals("y"));
-        SCANNER.close();
-    }
-
-    private static boolean checkEndGame(char dot, String winMessage) {
-        printField();
-        if (checkWin(dot)) {
-            System.out.println(winMessage);
-            return true;
+            if (checkDraw()) {
+                System.out.println("Draw!");
+                return true;
+            }
+            return false;
         }
-        if (checkDraw()) {
-            System.out.println("Draw!");
-            return true;
-        }
-        return false;
-    }
 }
