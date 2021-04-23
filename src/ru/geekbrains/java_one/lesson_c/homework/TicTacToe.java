@@ -195,12 +195,18 @@ public class TicTacToe {
 
         private static int checkDiagonal ( int k, int l){
             int countXinDiagonal = 1;
-            for (int i = k+1, j = l+1; i < fieldSizeY; i++, j++) {
-                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
+
+            while(isValidCell(k+1, l+1)){
+                for (int i = k+1, j = l+1; i < fieldSizeY; i++, j++) {
+                    if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
+                }
             }
-            for (int i = k-1, j = l-1; i >= 0; i--, j--) {
-                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
+            while (isValidCell(k-1, l-1)){
+                for (int i = k-1, j = l-1; i >= 0; i--, j--) {
+                    if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
+                }
             }
+
             return countXinDiagonal;
         }
 
