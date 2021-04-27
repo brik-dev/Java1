@@ -100,18 +100,20 @@ public class TicTacToe {
                     diagonal = checkDiagonal(i, j);
                     switch (diagonal) {
                         case 2:
-                            if (isEmptyCell(i + 2, j + 2) && isValidCell(i + 2, j + 2)) {
+                            if(i + 2 > fieldSizeY || j + 2 > fieldSizeX) continue;
+                            if (isEmptyCell(i + 2, j + 2)) {
                                 x = i + 2;
                                 y = j + 2;
-                            } else if (isEmptyCell(i - 2, j - 2) && isValidCell(i - 2, j - 2)) {
+                            } else if (isEmptyCell(i - 2, j - 2)) {
                                 x = i - 2;
                                 y = j - 2;
                             }
                         case 1:
-                            if (isEmptyCell(i + 1, j + 1) && isValidCell(i + 1, j + 1)) {
+                            if(i + 1 > fieldSizeY || j + 1 > fieldSizeX) continue;
+                            if (isEmptyCell(i + 1, j + 1)) {
                                 x = i + 1;
                                 y = j + 1;
-                            } else if (isEmptyCell(i - 1, j - 1) && isValidCell(i - 1, j - 1)) {
+                            } else if (isEmptyCell(i - 1, j - 1)) {
                                 x = i - 1;
                                 y = j - 1;
                             }
