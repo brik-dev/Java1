@@ -88,7 +88,7 @@ public class TicTacToe {
 //        field[y][x] = DOT_AI;
 //    }
 
-    //aiTurn intelligent
+    //ход компьютера
     private static void aiTurn() {
         int x = 0;
         int y = 0;
@@ -129,119 +129,67 @@ public class TicTacToe {
         }
     }
 
+    //Проверка, может ли выиграть компьютер
+    private static boolean turnAIWinCell(){
 
-//            int vertical = checkVertical();
-//            int horizontal = checkHorizontal();
-//
-//            if (diagonal == (winCombination - 1)) {
-//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
-//                        x = i + 1;
-//                        y = j + 1;
-//                    }
-//                }
-//            } else if (vertical == (winCombination - 1)) {
-//                for (int j = 0; j < fieldSizeX; j++) {
-//                    for (int i = 0; i < fieldSizeY; i++) {
-//                        if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j) && (!isEmptyCell(i + 1, j))) {
-//                            x = i;
-//                            y = j + 1;
-//                        }
-//                    }
-//                }
-//            } else if (horizontal == (winCombination - 1)) {
-//                for (int i = 0; i < fieldSizeX; i++) {
-//                    for (int j = 0; j < fieldSizeY; j++) {
-//                        if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
-//                            x = i + 1;
-//                            y = j;
-//                        }
-//                    }
-//                }
-//            } else if (diagonal == (winCombination - 2)) {
-//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
-//                        x = i + 1;
-//                        y = j + 1;
-//                    }
-//                }
-//            } else if (vertical == (winCombination - 2)) {
-//                for (int j = 0; j < fieldSizeX; j++) {
-//                    for (int i = 0; i < fieldSizeY; i++) {
-//                        if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j) && (!isEmptyCell(i + 1, j))) {
-//                            x = i;
-//                            y = j + 1;
-//                        }
-//                    }
-//                }
-//            } else if (horizontal == (winCombination - 2)) {
-//                for (int i = 0; i < fieldSizeX; i++) {
-//                    for (int j = 0; j < fieldSizeY; j++) {
-//                        if (field[i][j] == DOT_HUMAN && isValidCell(i, j + 1) && (!isEmptyCell(i, j + 1))) {
-//                            x = i + 1;
-//                            y = j;
-//                        }
-//                    }
-//                }
-//            } else {
-//                for (int i = 0, j = 0; i < fieldSizeY; i++, j++) {
-//                    if (field[i][j] == DOT_HUMAN && isValidCell(i + 1, j + 1) && (!isEmptyCell(i + 1, j + 1))) {
-//                        x = i + 1;
-//                        y = j + 1;
-//                    }
-//                }
-//            }
+    }
 
-//            field[y][x] = DOT_AI;
-//        }
+    //Проверка, выиграет ли игрок своим следующим ходом
+    private static boolean turnHumanWinCell(){
 
-        private static int checkDiagonal ( int k, int l){
-            int countXinDiagonal = 1;
+    }
 
-            while(isValidCell(k+1, l+1)){
-                for (int i = k+1, j = l+1; i < fieldSizeY; i++, j++) {
-                    if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
-                }
+    // проверка линии
+    private static boolean checkLine(int x, int y, int vx, int vy, int len, int c){
+
+    }
+    private static int checkDiagonal ( int k, int l){
+        int countXinDiagonal = 1;
+
+        while(isValidCell(k+1, l+1)){
+            for (int i = k+1, j = l+1; i < fieldSizeY; i++, j++) {
+                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
             }
-            while (isValidCell(k-1, l-1)){
-                for (int i = k-1, j = l-1; i >= 0; i--, j--) {
-                    if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
-                }
+        }
+        while (isValidCell(k-1, l-1)){
+            for (int i = k-1, j = l-1; i >= 0; i--, j--) {
+                if (field[i][j] == DOT_HUMAN) countXinDiagonal++;
             }
-
-            return countXinDiagonal;
         }
 
-        private static int checkVertical () {
-            int countXinVertical = 0;
-            for (int j = 0; j < fieldSizeX; j++) {
-                for (int i = 0; i < fieldSizeY; i++) {
-                    if (field[i][j] == DOT_HUMAN) countXinVertical++;
-                }
-            }
-            return countXinVertical;
-        }
+        return countXinDiagonal;
+    }
 
-        private static int checkHorizontal () {
-            int countXinHorizontal = 0;
-            for (int i = 0; i < fieldSizeX; i++) {
-                for (int j = 0; j < fieldSizeY; j++) {
-                    if (field[i][j] == DOT_HUMAN) countXinHorizontal++;
-                }
+    private static int checkVertical () {
+        int countXinVertical = 0;
+        for (int j = 0; j < fieldSizeX; j++) {
+            for (int i = 0; i < fieldSizeY; i++) {
+                if (field[i][j] == DOT_HUMAN) countXinVertical++;
             }
-            return countXinHorizontal;
         }
+        return countXinVertical;
+    }
 
-        private static boolean checkDraw () {
-            for (int y = 0; y < fieldSizeY; y++) {
-                for (int x = 0; x < fieldSizeX; x++) {
-                    if (isEmptyCell(x, y)) return false;
-                }
+    private static int checkHorizontal () {
+        int countXinHorizontal = 0;
+        for (int i = 0; i < fieldSizeX; i++) {
+            for (int j = 0; j < fieldSizeY; j++) {
+                if (field[i][j] == DOT_HUMAN) countXinHorizontal++;
             }
-            return true;
         }
+        return countXinHorizontal;
+    }
 
-        private static boolean checkWin ( char c){
+    private static boolean checkDraw () {
+        for (int y = 0; y < fieldSizeY; y++) {
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (isEmptyCell(x, y)) return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkWin ( char c){
             // hor
             int count = 0;
             for (int i = 0; i < field.length; i++) {
@@ -280,25 +228,25 @@ public class TicTacToe {
 
         }
 
-        public static void main (String[]args){
+    public static void main (String[]args){
 
-            initField();
-            printField();
-            String answer;
-            do {
-                while (true) {
-                    humanTurn();
-                    if (checkEndGame(DOT_HUMAN, "Human win!")) break;
-                    aiTurn();
-                    if (checkEndGame(DOT_AI, "Computer win!")) break;
-                }
-                System.out.println("Wanna play again? (y/n) >>> ");
-                answer = SCANNER.next();
-            } while (answer.equals("y"));
-            SCANNER.close();
-        }
+        initField();
+        printField();
+        String answer;
+        do {
+            while (true) {
+                humanTurn();
+                if (checkEndGame(DOT_HUMAN, "Human win!")) break;
+                aiTurn();
+                if (checkEndGame(DOT_AI, "Computer win!")) break;
+            }
+            System.out.println("Wanna play again? (y/n) >>> ");
+            answer = SCANNER.next();
+        } while (answer.equals("y"));
+        SCANNER.close();
+    }
 
-        private static boolean checkEndGame ( char dot, String winMessage){
+    private static boolean checkEndGame ( char dot, String winMessage){
             printField();
             if (checkWin(dot)) {
                 System.out.println(winMessage);
@@ -310,4 +258,7 @@ public class TicTacToe {
             }
             return false;
         }
+
+
+
 }
