@@ -141,7 +141,7 @@ public class TicTacToe {
 
     // проверка линии
     private static boolean checkLine(int x, int y, int vx, int vy, int len, int c){
-
+        // to be developed
     }
     private static int checkDiagonal ( int k, int l){
         int countXinDiagonal = 1;
