@@ -2,7 +2,7 @@ package ru.geekbrains.java_one.lesson_d.online;
 
 public class Main {
     public static void main(String[] args) {
-        // to check again
+        // to check again and rewrite on my own from the memory
         Cat c0 = new Cat("Barsik", "White", 5);
         Cat c1 = new Cat("Murzik", "Black", 2);
         Cat c3 = new Cat("Peachy", 4);
