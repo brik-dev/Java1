@@ -131,17 +131,17 @@ public class TicTacToe {
 
     //Проверка, может ли выиграть компьютер
     private static boolean turnAIWinCell(){
-
+        return true;
     }
 
     //Проверка, выиграет ли игрок своим следующим ходом
     private static boolean turnHumanWinCell(){
-
+        return true;
     }
 
     // проверка линии
     private static boolean checkLine(int x, int y, int vx, int vy, int len, int c){
-        // to be developed
+        return true;// to be developed
     }
     private static int checkDiagonal ( int k, int l){
         int countXinDiagonal = 1;
