@@ -19,5 +19,6 @@ public class Main {
         System.out.printf("Cat: %s is %s of age %d\n", c0.name, c0.color, c0.age);
         System.out.printf("Cat: %s is %s of age %d\n", c1.name, c1.color, c1.age);
 
+        //next steps
     }
 }
