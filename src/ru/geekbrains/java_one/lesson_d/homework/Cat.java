@@ -23,5 +23,6 @@ public class Cat {
         if(age < 6)
             System.out.println(name + "jumps");
     }
+    //next steps
 }
 
